@@ -221,7 +221,7 @@ const Swiper = {
     'virtualUpdate',
     'zoomChange',
   ],
-  setup(props, { slots: originalSlots, emit }) {
+  setup(props, { slots: originalSlots, emit, expose }) {
     const { tag: Tag, wrapperTag: WrapperTag } = props;
 
     const containerClasses = ref('swiper');
@@ -318,6 +318,10 @@ const Swiper = {
     });
 
     provide('swiper', swiperRef);
+
+    expose({
+        swiper: () => swiperRef.value
+    })
 
     // update on virtual update
     watch(virtualData, () => {
